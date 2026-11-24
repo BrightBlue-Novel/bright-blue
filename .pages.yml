@@ -1,0 +1,36 @@
+# Bright Blue library - Pages CMS trial configuration
+# Trial branch only. This does not publish stories to the website.
+media:
+  input: media
+  output: /bright-blue/media
+
+content:
+  - name: stories
+    label: 小説・エピソード
+    type: collection
+    path: content/stories
+    format: yaml-frontmatter
+    filename: "{primary}.md"
+    fields:
+      - name: title
+        label: エピソードタイトル
+        type: string
+        required: true
+      - name: series
+        label: シリーズ名
+        type: string
+        required: true
+        description: "例：Bright Blue / Deep Blue"
+      - name: chapter
+        label: 章・編（任意）
+        type: string
+        description: "章が不要な話は空欄にしてください"
+      - name: body
+        label: 本文
+        type: text
+        required: true
+        description: "小説の文章を貼り付けます。TXTファイル取り込みは今後の追加機能です"
+    view:
+      fields: [title, series, chapter]
+      primary: title
+      sort: [title, series]
