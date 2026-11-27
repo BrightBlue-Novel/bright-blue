@@ -8,7 +8,7 @@ content:
   - name: stories
     label: 小説・エピソード
     type: collection
-    path: content/stories
+    path: content/_stories
     format: yaml-frontmatter
     filename: "{primary}.md"
     fields:
