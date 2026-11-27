@@ -1,3 +1,5 @@
+---
+---
 <!doctype html>
 <html lang="ja">
 <head>
@@ -45,12 +47,21 @@
     <section aria-labelledby="works-heading">
       <p class="section-label">LIBRARY / STORIES</p>
       <h2 id="works-heading">収蔵作品</h2>
-      <article class="story">
-        <p class="eyebrow">SHORT STORY 01</p>
-        <h3>新しい閑話（準備中）</h3>
-        <p>本文は準備中です。公開時に作品へのリンクを追加します。</p>
-        <span class="status">公開準備中</span>
+      {% assign series_groups = site.stories | group_by: "series" | sort: "name" %}
+      {% for series in series_groups %}
+      <article class="story" style="margin-bottom:24px">
+        <h3>{{ series.name | escape }}</h3>
+        {% assign ordered = series.items | sort: "path" %}
+        {% for story in ordered %}{% unless story.chapter and story.chapter != empty %}
+        <p><a href="{{ story.url | relative_url }}">{{ story.title | escape }}</a></p>
+        {% endunless %}{% endfor %}
+        {% assign chapters = ordered | group_by: "chapter" %}
+        {% for chapter in chapters %}{% if chapter.name != empty %}
+        <h4>{{ chapter.name | escape }}</h4>
+        {% for story in chapter.items %}<p><a href="{{ story.url | relative_url }}">{{ story.title | escape }}</a></p>{% endfor %}
+        {% endif %}{% endfor %}
       </article>
+      {% else %}<p>作品は準備中です。</p>{% endfor %}
     </section>
     <p class="note">この図書館は公開用の静的サイトです。原稿のバックアップは別途保管してください。</p>
   </main>
