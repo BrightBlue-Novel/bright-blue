@@ -1,0 +1,17 @@
+title: Bright Blue
+lang: ja
+collections_dir: content
+collections:
+  stories:
+    output: true
+    permalink: /stories/:name/
+defaults:
+  - scope:
+      path: ""
+      type: stories
+    values:
+      layout: story
+      render_with_liquid: false
+      markdown: false
+exclude:
+  - README.md
